@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DatesTrait;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
-#[ORM\Table(name: '`order`')]
+#[ORM\Table(name: '`orders`')]
+#[ORM\HasLifecycleCallbacks()]
 class Order
 {
+    use DatesTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -22,6 +26,9 @@ class Order
 
     #[ORM\Column(type: 'string', length: 40)]
     private $customer_mobile;
+
+    #[ORM\Column(type: 'string', length: 20)]
+    private $status;
 
     public function getId(): ?int
     {
