@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Order!{% endblock %}
+
+{% block body %}
+
+    <h1>Nuevo pedido 🆕</h1>
+
+    <div class="row">
+        <div class="col text-end pb-2">
+{#            <a class="btn btn-warning" href="{{ url('orders') }}">Pedidos</a>#}
+        </div>
+    </div>
+
+        {{ form_start(form, {attr:{
+            'novalidate': true,
+            'class': form.vars['submitted']?'was-validated':''
+        }}) }}
+        <div class="row">
+            <div class="row">
+                <div class="col-sm-6 mt-2">
+                    <div class="form-floating">
+                        {{ form_widget(form.customer_name, {'attr': {'class': 'form-control','placeholder':'label.name'|trans}}) }}
+                        {{ form_label(form.customer_name, 'Your Name'|trans,) }}
+                        <div class="invalid-feedback">
+                            {{ form_errors(form.customer_name) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 mt-2">
+                    <div class="form-floating">
+                        {{ form_widget(form.customer_email, {'attr': {'class': 'form-control', 'rows': 4,'placeholder':'label.description'|trans}}) }}
+                        {{ form_label(form.customer_email, 'Email'|trans,) }}
+                        <div class="invalid-feedback">
+                            {{ form_errors(form.customer_email) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 mt-2">
+                    <div class="form-floating">
+                        {{ form_widget(form.customer_mobile, {'attr': {'class': 'form-select','placeholder':'mobile'|trans}}) }}
+                        {{ form_label(form.customer_mobile, 'Mobile'|trans,) }}
+                        <div class="invalid-feedback">
+                            {{ form_errors(form.customer_mobile) }}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-auto ms-auto my-3">
+                    <button type="submit" class="btn btn-dark" name="btnSave" id="btnSave">{{ 'btn.save'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+
+{% endblock %}

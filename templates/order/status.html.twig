@@ -4,15 +4,15 @@
     <section class="container-fluid container-fluid-zebra">
         <div class="row">
             <div class="col-sm-6">
-                <h1 class="s28 text-uppercase mt-5">{{ 'Gracias por utulizar nuestros servicios su pedido esta siendo processado...'|trans }}</h1>
-                <h4 class="s28 text-uppercase mt-5">{{ payment.reference }}</h4>
+                <h1 class="s28 text-uppercase mt-5">{{ 'El estado de su pedido esta en '|trans }}{{ status.message }}</h1>
+                <h4 class="s28 text-uppercase mt-5"></h4>
             </div>
         </div>
         <hr class="mt-0 mb-4">
         <div class="row">
             <div class="col-sm-12" data-controller="application--form-token">
                 <span>
-                    <a href="{{ payment.url }}">Ir a pagar con placetopay.com</a>
+                        <a href="https://checkout-co.placetopay.dev/state/55096/3088b65565f68a8b7be5e9f3256b5b1b">Ver detalle</a>
                 </span>
             </div>
         </div>

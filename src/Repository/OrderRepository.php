@@ -39,6 +39,15 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function save(Order $catalog, bool $andFlush = true): void
+    {
+        $em = $this->getEntityManager();
+
+        $em->persist($catalog);
+
+        $andFlush && $em->flush();
+    }
 //    /**
 //     * @return Order[] Returns an array of Order objects
 //     */

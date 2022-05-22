@@ -13,22 +13,42 @@ class Order
 {
     use DatesTrait;
 
+    public const STATUS_CREATED = 'CREATED';
+    public const STATUS_PAYED = 'PAYMENT';
+    public const STATUS_REJECTED = 'REJECTED';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $customer_name;
+    private ?string $customer_name;
 
     #[ORM\Column(type: 'string', length: 120)]
-    private $customer_email;
+    private ?string $customer_email;
 
     #[ORM\Column(type: 'string', length: 40)]
-    private $customer_mobile;
+    private ?string $customer_mobile;
 
     #[ORM\Column(type: 'string', length: 20)]
-    private $status;
+    private string $status;
+
+    #[ORM\OneToOne(targetEntity: Payment::class, cascade: ['persist', 'remove'])]
+    private $payment;
+
+    public function __construct(?string $customer_email = null, ?string $customer_mobile = null, ?string $customer_name = null)
+    {
+        $this->customer_email = $customer_email;
+        $this->customer_mobile = $customer_mobile;
+        $this->customer_name = $customer_name;
+        $this->status = self::STATUS_CREATED;
+    }
+
+    public static function createOrder(string $customer_email, string $customer_mobile, string $customer_name)
+    {
+        return new static($customer_email, $customer_mobile, $customer_name);
+    }
 
     public function getId(): ?int
     {
@@ -67,6 +87,23 @@ class Order
     public function setCustomerMobile(string $customer_mobile): self
     {
         $this->customer_mobile = $customer_mobile;
+
+        return $this;
+    }
+
+    public function changeStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function getPayment(): ?Payment
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(?Payment $payment): self
+    {
+        $this->payment = $payment;
 
         return $this;
     }
