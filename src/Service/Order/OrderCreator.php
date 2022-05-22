@@ -43,7 +43,6 @@ class OrderCreator
             throw new ConnectionFailedException($response);
         }
 
-        dd($response);
         $this->eventDispatcher->dispatch(new EventSessionPayment(PaymentResponse::create(
             $request['payment']['reference'],
             $request['expiration'],
