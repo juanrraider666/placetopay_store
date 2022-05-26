@@ -40,11 +40,11 @@ class OrderRepository extends ServiceEntityRepository
     }
 
 
-    public function save(Order $catalog, bool $andFlush = true): void
+    public function save(Order $order, bool $andFlush = true): void
     {
         $em = $this->getEntityManager();
 
-        $em->persist($catalog);
+        $em->persist($order);
 
         $andFlush && $em->flush();
     }

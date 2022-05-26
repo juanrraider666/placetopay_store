@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Payment;
+namespace App\Request\Payment;
 
 use App\Entity\Order;
 use Dnetix\Redirection\Message\RedirectResponse;

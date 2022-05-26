@@ -3,29 +3,62 @@
 {% block body %}
 
     <div class="container">
-        <a href="{{ path('app_order_new') }}">
+        <a href="{{ path('app_products') }}">
             <span>
                 Create new Order
             </span>
         </a>
     </div>
 
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Client</th>
-                <th>Status</th>
-                <th>Code</th>
-                <th>Add To category</th>
-            </tr>
-            </thead>
-            <tbody>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <aside class="col-xs-12 col-lg-3">
+{#                {% if featuredProduct %}#}
+{#                    {{ include('cart/_featuredSidebar.html.twig') }}#}
+{#                {% endif %}#}
+            </aside>
 
-            </tbody>
-        </table>
+            <div class="col-xs-12 col-lg-9 cart">
+                <h1>My Orders</h1>
+                <div>
+                    <div>
+                        <div class="row p-3">
+                            <div class="col-3">
+                                Customer Name
+                            </div>
+                            <div class="col-3">
+                                Customer Email
+                            </div>
+                            <div class="col-3">
+                                Action
+                            </div>
+                            <div class="col-3"></div>
+                        </div>
+                        {% for order in orders %}
+                            <div
+                                    class="cart-item row p-3"
+                                    data-action="submit-confirm:async:submitted->reload-content#refreshContent"
+                            >
+                                <div class="col-2">
+                                    {{ order.customerName }}
+                                </div>
+                                <div class="col-3">
+                                    {{ order.customerEmail }}
+                                </div>
+                                <div class="col-3">
+                                    <a href="{{ path('app_order_my_status', { order: order.id  }) }}">
+                                    <span>View My Order status</span>
+                                    </a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="col-12">
+                                Your cart is empty! Get to shopping!
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

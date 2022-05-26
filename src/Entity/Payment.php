@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PaymentRepository;
 use DateTime;
 use DateTimeImmutable;
+use Dnetix\Redirection\Message\RedirectInformation;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PaymentRepository::class)]
@@ -16,13 +17,13 @@ class Payment
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $request;
+    private string $request;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $url;
+    private string $url;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $reference;
+    private string $reference;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $amount;
@@ -30,8 +31,8 @@ class Payment
     #[ORM\Column(type: 'datetime', nullable: true)]
     private DateTimeImmutable|\DateTime $expiration_date;
 
-    #[ORM\Column(type: 'string', length: 30)]
-    private $status;
+    #[ORM\Column(type: 'string', length: 200)]
+    private string $status;
 
     public function __construct($request, $amount, $expiration_date, $reference, $url, ?string $status)
     {

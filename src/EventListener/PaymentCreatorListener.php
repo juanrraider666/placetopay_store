@@ -3,7 +3,6 @@
 namespace App\EventListener;
 
 use App\Entity\Payment;
-use App\Repository\OrderRepository;
 use App\Repository\PaymentRepository;
 use DateTimeImmutable;
 
@@ -11,12 +10,10 @@ class PaymentCreatorListener
 {
 
     private PaymentRepository $paymentRepository;
-    private OrderRepository $orderRepository;
 
-    public function __construct(PaymentRepository $paymentRepository, OrderRepository $orderRepository)
+    public function __construct(PaymentRepository $paymentRepository)
     {
         $this->paymentRepository = $paymentRepository;
-        $this->orderRepository = $orderRepository;
     }
 
     public function onPaymentCreator(EventSessionPayment $eventSessionPayment)

@@ -4,7 +4,7 @@
     <section class="container-fluid container-fluid-zebra">
         <div class="row">
             <div class="col-sm-6">
-                <h1 class="s28 text-uppercase mt-5">{{ 'El estado de su pedido esta en '|trans }}{{ status.message }}</h1>
+                <h1 class="s28 text-uppercase mt-5">Hi {{ order.customerName }}, you Order status is: {{ order.status }}</h1>
                 <h4 class="s28 text-uppercase mt-5"></h4>
             </div>
         </div>
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-12" data-controller="application--form-token">
                 <span>
-                        <a href="https://checkout-co.placetopay.dev/state/55096/3088b65565f68a8b7be5e9f3256b5b1b">Ver detalle</a>
+                        <a target="_blank" href="{{ order.payment.url }}">{{ 'view detail'|trans }}</a>
                 </span>
             </div>
         </div>

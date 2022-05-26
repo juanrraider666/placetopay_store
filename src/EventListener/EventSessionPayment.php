@@ -2,11 +2,12 @@
 
 namespace App\EventListener;
 
-use App\Service\Payment\PaymentResponse;
+use App\Request\Payment\PaymentResponse;
 
 class EventSessionPayment
 {
     public const SESSION_COMPLETE_PAYMENT = 'payment.creator';
+
     private PaymentResponse $paymentResponse;
 
 

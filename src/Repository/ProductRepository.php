@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Payment;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Payment>
+ * @extends ServiceEntityRepository<Product>
  *
- * @method Payment|null find($id, $lockMode = null, $lockVersion = null)
- * @method Payment|null findOneBy(array $criteria, array $orderBy = null)
- * @method Payment[]    findAll()
- * @method Payment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Product|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Product|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Product[]    findAll()
+ * @method Product[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PaymentRepository extends ServiceEntityRepository
+class ProductRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Payment::class);
+        parent::__construct($registry, Product::class);
     }
 
-    public function add(Payment $entity, bool $flush = false): void
+    public function add(Product $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class PaymentRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Payment $entity, bool $flush = false): void
+    public function remove(Product $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,14 +39,22 @@ class PaymentRepository extends ServiceEntityRepository
         }
     }
 
-    public function saveStatus(Payment $payment, string $status)
+    public function search(?string $term)
     {
-        $payment->setStatus($status);
-        $this->add($payment, true);
+        $qb = $this->createQueryBuilder('product');
+
+        if ($term) {
+            $qb->andWhere('product.name LIKE :term OR product.description LIKE :term')
+                ->setParameter('term', '%'.$term.'%');
+        }
+
+        return $qb
+            ->getQuery()
+            ->execute();
     }
 
 //    /**
-//     * @return Payment[] Returns an array of Payment objects
+//     * @return Product[] Returns an array of Product objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -60,7 +68,7 @@ class PaymentRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Payment
+//    public function findOneBySomeField($value): ?Product
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

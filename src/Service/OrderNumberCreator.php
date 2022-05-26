@@ -28,7 +28,7 @@ class OrderNumberCreator
             return $this->getRandomAlphaNumStr();
         }
 
-        $encodedData = \json_encode([uniqid()]);
+        $encodedData = \json_encode([uniqid(), $short]);
 
         return \str_replace(['/','+', '='], '', $this->getHashedToken($encodedData));
     }

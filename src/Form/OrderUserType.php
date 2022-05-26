@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Order;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,9 +13,15 @@ class OrderUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('customer_name')
-            ->add('customer_email')
-            ->add('customer_mobile')
+            ->add('customerName', null, [
+                'label' => 'Name',
+            ])
+            ->add('customerEmail', EmailType::class, [
+                'label' => 'Email',
+            ])
+            ->add('customerMobile', null, [
+                'label' => 'Address',
+            ])
         ;
     }
 

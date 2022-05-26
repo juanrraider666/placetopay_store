@@ -2,16 +2,40 @@
 
 namespace App\Entity\Traits;
 
-use App\Entity\Embedded\Date;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 trait DatesTrait
 {
-    #[ORM\Embedded(class: Date::class, columnPrefix: false)]
-    protected Date $dates;
+    #[ORM\Column(
+        name: 'created_at',
+        updatable: false,
+    )]
+    private \DateTime $createdAt;
 
-    public function getDates(): Date
+    #[ORM\Column(
+        name: 'updated_at',
+        nullable: true,
+        insertable: false,
+        updatable: false,
+        columnDefinition: 'timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
+    )]
+    private \DateTime $updatedAt;
+
+    public function getCreatedAt(): DateTimeImmutable
     {
-        return $this->dates ??= new Date();
+        return $this->createdAt ??= new DateTimeImmutable();
+    }
+
+    public function getUpdatedAt(): DateTimeImmutable
+    {
+        return $this->updatedAt ??= new DateTimeImmutable();
+    }
+
+    #[ORM\PrePersist]
+    public function prePersist()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 }

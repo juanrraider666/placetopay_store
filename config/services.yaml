@@ -12,7 +12,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
         bind:
-           $placeToPayApi: "%env(PLACE_TO_PAY)%"
+           $placeToPayApi: "%env(PLACE_TO_PAY_API)%"
            $placeToPayToken: "%env(PLACE_TO_PAY_TOKEN)%"
            $placeToPayTranKey: "%env(PLACE_TO_PAY_TRANKEY)%"
            $signingKey: "%kernel.secret%"
@@ -25,6 +25,7 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+            - '../src/Tests/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
