@@ -7,7 +7,7 @@ use App\Entity\Product;
 use App\EventListener\EventSessionPayment;
 use App\Request\Payment\PaymentResponse;
 use App\Service\Order\Exceptions\ConnectionFailedException;
-use App\Service\OrderReferenceFactory;
+use App\Service\OrderReferenceProvider;
 use App\Service\PlaceToPayManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class OrderGenerator
 {
 
-    public function __construct(private PlaceToPayManager $placeToPayManager, private OrderReferenceFactory $orderReferenceFactory, private EventDispatcherInterface $eventDispatcher)
+    public function __construct(private PlaceToPayManager $placeToPayManager, private OrderReferenceProvider $orderReferenceFactory, private EventDispatcherInterface $eventDispatcher)
     {
     }
 

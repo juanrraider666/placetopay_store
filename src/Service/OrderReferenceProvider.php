@@ -6,7 +6,7 @@ use App\Entity\Product;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Request;
 
-class OrderReferenceFactory
+class OrderReferenceProvider
 {
     public function __construct(private OrderNumberCreator $orderNumberCreator, private RequestStack $requestStack)
     {
@@ -42,7 +42,6 @@ class OrderReferenceFactory
 
     private function getClientIp()
     {
-        $ipaddress = '';
         if (isset($_SERVER['HTTP_CLIENT_IP']))
             $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
         else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))

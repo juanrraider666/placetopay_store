@@ -39,6 +39,11 @@
                 'novalidate': true,
                 'class': form.vars['submitted']?'was-validated':''
             }}) }}
+
+            <div class="my-custom-class-for-errors">
+                {{ form_errors(form) }}
+            </div>
+
             <div class="form-row">
                 {{ form_row(form.customerName, {
                     row_attr: { class: 'col' }

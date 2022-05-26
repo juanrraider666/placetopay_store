@@ -25,14 +25,17 @@ class Order
     private int $id;
 
     #[Assert\NotBlank]
+    #[Assert\NotNull]
     #[ORM\Column(type: 'string', length: 255)]
     private string $customer_name;
 
     #[Assert\NotBlank]
+    #[Assert\NotNull]
     #[ORM\Column(type: 'string', length: 120)]
     private string $customer_email;
 
     #[Assert\NotBlank]
+    #[Assert\NotNull]
     #[ORM\Column(type: 'string', length: 40)]
     private string $customer_mobile;
 
