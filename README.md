@@ -1,6 +1,7 @@
-# placetopay_store
-Proyecto prueba evertec tienda
+# placetopay_store SYMFONY 6
+Proyecto prueba evertec tienda 
 
+Requerements: php 8.0.*  MYSQL: 8.0.*
 
 Run: composer Install
 
